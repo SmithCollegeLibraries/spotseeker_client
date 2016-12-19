@@ -257,6 +257,7 @@ class Spotseeker(object):
         spot.floor = spot_data["location"]["floor"]
         spot.room_number = spot_data["location"]["room_number"]
         spot.capacity = spot_data["capacity"]
+        spot.occupied = spot_data["occupied"]
         spot.display_access_restrictions = \
             spot_data["display_access_restrictions"]
         spot.organization = spot_data["organization"]

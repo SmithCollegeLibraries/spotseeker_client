@@ -66,6 +66,7 @@ class Spot(models.Model):
     room_number = models.CharField(max_length=25, blank=True)
     building_description = models.CharField(max_length=100, blank=True)
     capacity = models.IntegerField(null=True, blank=True)
+    occupied = models.IntegerField(null=True, blank=True)
     display_access_restrictions = models.CharField(max_length=200, blank=True)
     organization = models.CharField(max_length=50, blank=True)
     manager = models.CharField(max_length=50, blank=True)

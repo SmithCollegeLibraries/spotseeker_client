@@ -78,6 +78,21 @@ class Spot(models.Model):
                                    default=None,
                                    unique=True)
 
+    def remainder(self):
+        if self.occupied == None:
+            return self.capacity
+        else:
+            return self.capacity - self.occupied
+
+    def available(self):
+        return self.remainder() > 0
+
+    def percentage(self):
+        if self.occupied == None:
+            return 100
+        else:
+            return int(float(self.occupied) / float(self.capacity) * 100)
+
 
 class SpotItem(models.Model):
     item_id = models.IntegerField()

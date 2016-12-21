@@ -162,6 +162,28 @@ class Spotseeker(object):
             raise DataFailureException(url, resp.status, content)
         return resp
 
+    def post_occupancy(self, spot_id, occupancy_json):
+        url = "/api/v1/spot/%s/occupancy/" % spot_id
+        dao = SPOTSEEKER_DAO()
+
+        if isinstance(dao._getDAO(), File):
+            resp = dao.postURL(url, {})
+            content = resp.data
+        else:
+            try:
+                headers = {"X-OAuth-User": settings.OAUTH_USER,
+                           "Content-Type": "application/json"
+                           }
+                resp, content = dao.postURL(url,
+                                            headers,
+                                            occupancy_json)
+            except AttributeError:
+                raise ImproperlyConfigured("Must set OAUTH_USER in settings")
+
+        if resp.status != 201:
+            raise DataFailureException(url, resp.status, content)
+        return resp
+
     def get_spot_by_id(self, spot_id):
         url = "/api/v1/spot/%s" % spot_id
         dao = SPOTSEEKER_DAO()

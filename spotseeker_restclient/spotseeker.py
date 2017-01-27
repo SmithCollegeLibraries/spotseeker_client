@@ -180,8 +180,6 @@ class Spotseeker(object):
             except AttributeError:
                 raise ImproperlyConfigured("Must set OAUTH_USER in settings")
 
-        if resp.status != 201:
-            raise DataFailureException(url, resp.status, content)
         return resp
 
     def get_spot_by_id(self, spot_id):
